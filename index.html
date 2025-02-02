@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine, Mommy?</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffecf0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #ff4d6d;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .heart {
+            font-size: 5rem;
+            color: red;
+            animation: heartbeat 1s infinite alternate;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: #28a745;
+            color: white;
+        }
+        .no {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        @keyframes moveButton {
+            0% { top: 0px; left: 0px; }
+            100% { top: 50px; left: 50px; }
+        }
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .heart-fall {
+            position: absolute;
+            font-size: 2rem;
+            color: red;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Mommy Sayani, Will You Be Mine Forever? ❤️</h1>
+    <div class="heart">❤️</div>
+    <div class="buttons">
+        <button class="yes" onclick="showMessage()">Yes, My Love!</button>
+        <button class="no" onmouseover="moveNoButton()">No</button>
+    </div>
+
+    <div class="hearts-container"></div>
+
+    <script>
+        function showMessage() {
+            document.body.innerHTML = "<h1>Yay! I Love You, Mommy Sayani! ❤️</h1>" +
+                                      "<p>You are the reason my world is so beautiful. I promise to love you forever and ever! 💖</p>" +
+                                      "<img src='https://media1.giphy.com/media/TD9S6MSGZFg6hR8Om0/giphy.gif?cid=6c09b9529la2jezrkm5kguj2bydmldkd5ljfibofia0aq3gr&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g' alt='Love' width='300px'>";
+            startHeartsAnimation();
+        }
+
+        function moveNoButton() {
+            let button = document.querySelector('.no');
+            button.style.position = "absolute";
+            button.style.top = Math.random() * window.innerHeight + "px";
+            button.style.left = Math.random() * window.innerWidth + "px";
+        }
+
+        function startHeartsAnimation() {
+            const container = document.querySelector('.hearts-container');
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-fall';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+            setInterval(startHeartsAnimation, 2000);
+        }
+    </script>
+</body>
+</html>
+
